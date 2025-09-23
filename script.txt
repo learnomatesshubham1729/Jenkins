@@ -10,8 +10,6 @@ pipeline {
         }
         stage('Hello') {
             steps {
-                git 'https://github.com/learnomatesshubham1729/Jenkins.git'
-                sh 'cat Demo'
                 echo 'Hello World'
             }
         }
