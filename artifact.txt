@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+    tools {nodejs "mynodejs"}
+    environment {
+        Node_env="prod"
+    }
+    stages {
+        stage('Git repo') {
+            steps {
+                git 'https://github.com/learnomatesshubham1729/Jenkins.git'
+                sh 'cat Demo'
+            }
+        }
+        stage('Hello') {
+            steps {
+                echo Node_env
+                echo 'Hello World'
+            }
+        }
+        stage('mynodejs stage') {
+              steps {
+                sh 'npm install'
+            }
+        stage('My-artifact') {
+              steps {
+                archiveArtifacts artifacts: '*', followSymlinks: false
+            }
+        }
+    }
+}
