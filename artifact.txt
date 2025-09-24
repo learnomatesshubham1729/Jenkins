@@ -12,17 +12,14 @@ pipeline {
     stages {
         stage('Git repo') {
             steps {
-                git(
-                    credentialsId: 'e984f9cc-5c15-4813-837d-c66536425160',
-                    url: 'https://github.com/awstrainersz/gitdemoaug.git'
-                )
-                sh 'cat test123.txt'
+                git 'https://github.com/learnomatesshubham1729/Jenkins.git'
+                sh 'cat Demo'
             }
         }
 
         stage('Hello') {
             steps {
-                echo "${env.Node_env}"
+                echo Node_env
                 echo 'Hello World'
             }
         }
