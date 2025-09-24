@@ -1,31 +1,45 @@
 pipeline {
     agent any
-    tools {nodejs "mynodejs"}
-    environment {
-        Node_env="prod"
+
+    tools {
+        nodejs 'mynodejs'
     }
+
+    environment {
+        Node_env = 'prod'
+    }
+
     stages {
         stage('Git repo') {
             steps {
-                git 'https://github.com/learnomatesshubham1729/Jenkins.git'
-                sh 'cat Demo'
+                git(
+                    credentialsId: 'e984f9cc-5c15-4813-837d-c66536425160',
+                    url: 'https://github.com/awstrainersz/gitdemoaug.git'
+                )
+                sh 'cat test123.txt'
             }
         }
+
         stage('Hello') {
             steps {
-                echo Node_env
+                echo "${env.Node_env}"
                 echo 'Hello World'
             }
         }
+
         stage('mynodejs stage') {
-              steps {
+            steps {
                 sh 'npm install'
             }
+        }
+
         stage('My-artifact') {
-              steps {
-                archiveArtifacts artifacts: '*', followSymlinks: false
+            steps {
+                archiveArtifacts(
+                    artifacts: '*',
+                    followSymlinks: false
+                )
             }
         }
     }
-}
 }
